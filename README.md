@@ -57,3 +57,24 @@ Apesar de parecer fazer sentido migrar, o monolito ainda pode ser mantido devido
 
 **Ponto de Atenção**
 Quando estiver trabalhando com monolito modulares e houver uma biblioteca/framework/seedwork que é compartilhada em todos os módulos, CUIDADO! Neste caso, é necessário haver políticas bem definidas de como vão funcionar atualizações (correções / manutenções de bugs).
+
+## Estrutura do Projeto
+**Nome App:** CodeStore (e-commerce)
+
+**Contextos:**
+- product-adm (auxiliar)
+- store-catalog (principal)
+- customer-adm (auxiliar)
+- checkout (auxiliar)
+- payment (genérico)
+- invoice (genérico)
+
+![alt text](./assets/code-store-context.png)
+
+**Comunicação entre módulos:**
+- Uma das formas para diminuir o acoplamento é fazer os módulos se comunicarem através de fachadas (Facade).
+- O usecase de um módulo não deve chamar diretamente o usecase de outro módulo. Ao invés disso, o usecase chama o Facade de outro módulo quando houver necessidade.
+![alt text](./assets/comunicação-facade.png)
+
+
+
