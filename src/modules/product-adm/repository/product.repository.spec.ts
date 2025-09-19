@@ -18,7 +18,7 @@ describe("ProductRepository test", () => {
         await sequelize.sync();
     });
 
-    afterEach(async () => {
+    afterAll(async () => {
         await sequelize.close();
     });
 
@@ -45,5 +45,36 @@ describe("ProductRepository test", () => {
         expect(productDb.stock).toEqual(product.stock);
         expect(productDb.createdAt).toBeDefined();
         expect(productDb.updatedAt).toBeDefined();
+    });
+
+    it("should find a product", async () => {
+        const productRepository = new ProductRepository();
+
+        ProductModel.create({
+            id: "3be3999d-3f3d-4698-890c-ef01ee7fe690",
+            name: "Disco de freio sólido",
+            description: "Disco para freio marca XPTO",
+            purchasePrice: 238,
+            stock: 3,
+            createdAt: new Date(),
+            updatedAt: new Date()
+        });
+
+        const product = await productRepository.find("3be3999d-3f3d-4698-890c-ef01ee7fe690");
+
+        expect(product.id.id).toEqual("3be3999d-3f3d-4698-890c-ef01ee7fe690");
+        expect(product.name).toEqual("Disco de freio sólido");
+        expect(product.description).toEqual("Disco para freio marca XPTO");
+        expect(product.purchasePrice).toEqual(238);
+        expect(product.stock).toEqual(3);
+        expect(product.createdAt).toBeDefined();
+        expect(product.updatedAt).toBeDefined();
+    });
+
+    it("should throw error when product not found", async () => {
+        const productRepository = new ProductRepository();
+        const productId = "c041f722-d3da-4a6c-9e93-4bd2bc5873180";
+        expect(() => productRepository.find(productId))
+        .rejects.toThrowError(`Product with id ${productId} not found`);
     });
 })
