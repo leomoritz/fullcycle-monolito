@@ -1,7 +1,8 @@
+import UseCaseInterface from "../../../@shared/usecase/use-case.interface";
 import ProductGateway from "../../gateway/product.gateway";
 import { InputFindProductDto, OutputFindProductDto } from "./find-product.dto";
 
-export default class FindProductUseCase {
+export default class FindProductUseCase implements UseCaseInterface<InputFindProductDto, OutputFindProductDto> {
     private _productRepository: ProductGateway;
 
     constructor(repository: ProductGateway) {

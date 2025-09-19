@@ -18,7 +18,7 @@ describe("ProductRepository test", () => {
         await sequelize.sync();
     });
 
-    afterAll(async () => {
+    afterEach(async () => {
         await sequelize.close();
     });
 
@@ -32,10 +32,10 @@ describe("ProductRepository test", () => {
         }
         const product = new Product(props);
         const productRepository = new ProductRepository();
-        
+
         // Act
         await productRepository.add(product);
-        
+
         // Assert
         const productDb = await ProductModel.findOne({ where: { id: product.id.id } });
         expect(productDb.id).toEqual(product.id.id);
@@ -50,7 +50,7 @@ describe("ProductRepository test", () => {
     it("should find a product", async () => {
         const productRepository = new ProductRepository();
 
-        ProductModel.create({
+        await ProductModel.create({
             id: "3be3999d-3f3d-4698-890c-ef01ee7fe690",
             name: "Disco de freio sólido",
             description: "Disco para freio marca XPTO",
@@ -74,7 +74,7 @@ describe("ProductRepository test", () => {
     it("should throw error when product not found", async () => {
         const productRepository = new ProductRepository();
         const productId = "c041f722-d3da-4a6c-9e93-4bd2bc5873180";
-        expect(() => productRepository.find(productId))
-        .rejects.toThrowError(`Product with id ${productId} not found`);
+        await expect(() => productRepository.find(productId))
+            .rejects.toThrow(`Product with id ${productId} not found`);
     });
 })
