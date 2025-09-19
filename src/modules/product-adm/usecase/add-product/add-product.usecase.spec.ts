@@ -30,5 +30,7 @@ describe("Add product usecase unit test", () => {
         expect(output.description).toBe(input.description);
         expect(output.purchasePrice).toBe(input.purchasePrice);
         expect(output.stock).toBe(input.stock);
+        expect(output.createdAt).toBeDefined();
+        expect(output.updatedAt).toBeDefined();
     });
 });
