@@ -6,11 +6,16 @@ export interface InputAddProductFacadeDto {
     stock: number;
 }
 
-export interface InputCheckStockFacadeDto {
-    productId: string;
+export interface InputFindProductFacadeDto {
+    id: string;
 }
 
-export interface OutputCheckStockFacadeDto {
-    productId: string;
+export interface OutputFindProductFacadeDto {
+    id: string;
+    name: string;
+    description: string;
+    purchasePrice: number;
     stock: number;
+    createdAt: Date;
+    updatedAt: Date;
 }

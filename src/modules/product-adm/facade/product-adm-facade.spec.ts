@@ -34,10 +34,42 @@ describe("ProductAdmFacade test", () => {
         };
 
         // Act
-        productFacade.addProduct(input);
+        await productFacade.addProduct(input);
 
         // Assert
         const product = await ProductModel.findOne({ where: { id: input.id } });
+        expect(product).toBeDefined();
+        expect(product.id).toBe(input.id);
+        expect(product.name).toBe(input.name);
+        expect(product.description).toBe(input.description);
+        expect(product.purchasePrice).toBe(input.purchasePrice);
+        expect(product.stock).toBe(input.stock);
+        expect(product.createdAt).toBeDefined();
+        expect(product.updatedAt).toBeDefined();
+    });
+
+    it("should find a product", async () => {
+        // Arrange
+        const productFacade = ProductAdmFacadeFactory.create();
+
+        const input = {
+            id: "ea4af73d-8132-42ec-99f2-b3508336f733",
+            name: "Vela de ingnição",
+            description: "Marca XTPO",
+            purchasePrice: 100,
+            stock: 10,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        };
+
+        ProductModel.create(input);
+
+        // Act
+        const product = await productFacade.findProduct({
+            id: input.id
+        });
+
+        // Assert
         expect(product).toBeDefined();
         expect(product.id).toBe(input.id);
         expect(product.name).toBe(input.name);
