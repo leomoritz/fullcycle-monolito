@@ -57,4 +57,25 @@ describe("ProductRepository test", () => {
         expect(resultTwo.description).toBe("Marca XPTO");
         expect(resultTwo.salesPrice).toBe(300);
     });
+
+     it("should find a product", async () => {
+        // Arrange
+        await ProductModel.create({
+            id: "0f46d25d-0b26-4bba-844a-0ea7d130ebed",
+            name: "Vela de ignição",
+            description: "Marca XPTO",
+            salesPrice: 100
+        });
+
+        const productRepository = new ProductRepository();
+
+        // Act
+        const product = await productRepository.find("0f46d25d-0b26-4bba-844a-0ea7d130ebed");
+
+        // Assert
+        expect(product.id.id).toBe("0f46d25d-0b26-4bba-844a-0ea7d130ebed");
+        expect(product.name).toBe("Vela de ignição");
+        expect(product.description).toBe("Marca XPTO");
+        expect(product.salesPrice).toBe(100);
+    });
 });
