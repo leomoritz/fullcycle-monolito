@@ -79,4 +79,31 @@ describe("ProductAdmFacade test", () => {
         expect(product.createdAt).toBeDefined();
         expect(product.updatedAt).toBeDefined();
     });
+
+    it("should check product stock", async () => {
+        // Arrange
+        const productFacade = ProductAdmFacadeFactory.create();
+
+        const input = {
+            id: "ea4af73d-8132-42ec-99f2-b3508336f733",
+            name: "Vela de ingnição",
+            description: "Marca XTPO",
+            purchasePrice: 100,
+            stock: 10,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        };
+
+        ProductModel.create(input);
+
+        // Act
+        const output = await productFacade.checkStock({
+            productId: input.id
+        });
+
+        // Assert
+        expect(output).toBeDefined();
+        expect(output.productId).toBe(input.id);
+        expect(output.stock).toBe(input.stock);
+    });
 });

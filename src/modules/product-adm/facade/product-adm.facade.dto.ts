@@ -19,3 +19,12 @@ export interface OutputFindProductFacadeDto {
     createdAt: Date;
     updatedAt: Date;
 }
+
+export interface InputCheckStockFacadeDto {
+    productId: string;
+}
+
+export interface OutputCheckStockFacadeDto {
+    productId: string;
+    stock: number;
+}
