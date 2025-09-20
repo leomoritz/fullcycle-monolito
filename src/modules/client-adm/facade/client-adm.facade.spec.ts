@@ -1,9 +1,6 @@
 import { Sequelize } from "sequelize-typescript";
-import AddClientUseCase from "../usecase/add-client/add-client.usecase";
-import ClientAdmFacade from "./client-adm.facade";
-import FindClientUseCase from "../usecase/find-client/find-client.usecase";
 import { ClientModel } from "../repository/client.model";
-import ClientRepository from "../repository/client.repository";
+import ClientAdmFacadeFactory from "./client-adm.facade.factory";
 
 describe("ClientAdmFacade test", () => {
     let sequelize: Sequelize;
@@ -26,12 +23,7 @@ describe("ClientAdmFacade test", () => {
 
     it("should create a client", async () => {
         // Arrange
-        const repository = new ClientRepository();
-        const addUseCase = new AddClientUseCase(repository);
-        const facade = new ClientAdmFacade({
-            addUsecase: addUseCase,
-            findUsecase: undefined
-        });
+        const facade = ClientAdmFacadeFactory.create();
 
         const input = {
             id: "ac1c4323-ff10-41cb-9c78-dceba3765c86",
@@ -57,12 +49,7 @@ describe("ClientAdmFacade test", () => {
 
     it("should find a client", async () => {
         // Arrange
-        const repository = new ClientRepository();
-        const findUseCase = new FindClientUseCase(repository);
-        const facade = new ClientAdmFacade({
-            addUsecase: undefined,
-            findUsecase: findUseCase
-        });
+        const facade = ClientAdmFacadeFactory.create();
 
         const input = {
             id: "5be6e1ab-010a-4ee4-af83-37f34e9602c4"
