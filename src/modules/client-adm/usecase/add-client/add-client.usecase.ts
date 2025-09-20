@@ -1,9 +1,10 @@
 import Id from "../../../@shared/domain/value-object/id.value-object";
+import UseCaseInterface from "../../../@shared/usecase/use-case.interface";
 import Client from "../../domain/client.entity";
 import ClientGateway from "../../gateway/client.gateway";
 import { InputAddClientUseCaseDto, OutputAddClientUseCaseDto } from "./add-client.usecase.dto";
 
-export default class AddClientUseCase {
+export default class AddClientUseCase implements UseCaseInterface<InputAddClientUseCaseDto, OutputAddClientUseCaseDto> {
     constructor(private _clientRepository: ClientGateway) { }
 
     async execute(input: InputAddClientUseCaseDto): Promise<OutputAddClientUseCaseDto> {
