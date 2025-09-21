@@ -6,7 +6,7 @@ type TransactionProps = {
     id?: TransactionId;
     amount: number;
     orderId: string;
-    status: string;
+    status?: string;
     createdAt?: Date;
     updatedAt?: Date;
 };
@@ -28,6 +28,7 @@ export default class Transaction extends BaseEntity implements AggregateRoot {
         this._amount = props.amount;
         this._orderId = props.orderId;
         this._status = props.status || "pending";
+        this.validate();
     }
 
     validate(): void {
