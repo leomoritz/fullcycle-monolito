@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1758416198638" clover="3.2.0">
-  <project timestamp="1758416198638" name="All files">
-    <metrics statements="199" coveredstatements="197" conditionals="31" coveredconditionals="28" methods="22" coveredmethods="22" elements="252" coveredelements="247" complexity="0" loc="199" ncloc="199" packages="6" files="7" classes="7"/>
+<coverage generated="1758416380668" clover="3.2.0">
+  <project timestamp="1758416380668" name="All files">
+    <metrics statements="213" coveredstatements="211" conditionals="32" coveredconditionals="29" methods="24" coveredmethods="23" elements="269" coveredelements="263" complexity="0" loc="213" ncloc="213" packages="6" files="8" classes="8"/>
     <package name="@shared.domain.entity">
       <metrics statements="25" coveredstatements="25" conditionals="5" coveredconditionals="5" methods="4" coveredmethods="4"/>
       <file name="base.entity.ts" path="/home/leoguimpr/fullcycle/sistemas-monolíticos/fullcycle-monolito/src/modules/@shared/domain/entity/base.entity.ts">
@@ -128,7 +128,24 @@
       </file>
     </package>
     <package name="payment.facade">
-      <metrics statements="12" coveredstatements="12" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
+      <metrics statements="26" coveredstatements="26" conditionals="3" coveredconditionals="3" methods="4" coveredmethods="3"/>
+      <file name="payment.facade.factory.ts" path="/home/leoguimpr/fullcycle/sistemas-monolíticos/fullcycle-monolito/src/modules/payment/facade/payment.facade.factory.ts">
+        <metrics statements="14" coveredstatements="14" conditionals="1" coveredconditionals="1" methods="2" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="9" count="2" type="stmt"/>
+        <line num="10" count="2" type="stmt"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="12" count="2" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+      </file>
       <file name="payment.facade.ts" path="/home/leoguimpr/fullcycle/sistemas-monolíticos/fullcycle-monolito/src/modules/payment/facade/payment.facade.ts">
         <metrics statements="12" coveredstatements="12" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>

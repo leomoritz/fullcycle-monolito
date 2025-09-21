@@ -1,8 +1,6 @@
 import { Sequelize } from "sequelize-typescript"
 import TransactionModel from "../repository/transaction.model";
-import TransactionRepository from "../repository/transaction.repository";
-import ProcessPaymentUseCase from "../usecase/process-payment/process-payment.usecase";
-import PaymentFacade from "./payment.facade";
+import PaymentFacadeFactory from "./payment.facade.factory";
 
 describe("PaymentFacade test", () => {
     let sequelize: Sequelize;
@@ -25,9 +23,7 @@ describe("PaymentFacade test", () => {
 
     it("should save a approved transaction", async () => {
         // Arrange
-        const repository = new TransactionRepository();
-        const usecase = new ProcessPaymentUseCase(repository);
-        const facade = new PaymentFacade(usecase);
+        const facade = PaymentFacadeFactory.create();
 
         const input = {
             orderId: "4c01dfa7-6073-4ce2-a3ae-9341a4b540d4",
@@ -47,9 +43,7 @@ describe("PaymentFacade test", () => {
 
     it("should save a declined transaction", async () => {
         // Arrange
-        const repository = new TransactionRepository();
-        const usecase = new ProcessPaymentUseCase(repository);
-        const facade = new PaymentFacade(usecase);
+        const facade = PaymentFacadeFactory.create();
 
         const input = {
             orderId: "b5da2d2f-a36b-4d00-b9af-9907d75dd960",
