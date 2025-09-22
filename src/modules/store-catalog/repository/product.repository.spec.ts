@@ -27,14 +27,18 @@ describe("ProductRepository test", () => {
             id: "0f46d25d-0b26-4bba-844a-0ea7d130ebed",
             name: "Vela de ignição",
             description: "Marca XPTO",
-            salesPrice: 100
+            salesPrice: 100,
+            createdAt: new Date(),
+            updatedAt: new Date()
         });
 
         await ProductModel.create({
             id: "0edfd09d-d303-4df7-9200-c8f3a06c5dd5",
             name: "Disco de freio sólido",
             description: "Marca XPTO",
-            salesPrice: 300
+            salesPrice: 300,
+            createdAt: new Date(),
+            updatedAt: new Date()
         });
 
         const productRepository = new ProductRepository();
@@ -58,13 +62,15 @@ describe("ProductRepository test", () => {
         expect(resultTwo.salesPrice).toBe(300);
     });
 
-     it("should find a product", async () => {
+    it("should find a product", async () => {
         // Arrange
         await ProductModel.create({
             id: "0f46d25d-0b26-4bba-844a-0ea7d130ebed",
             name: "Vela de ignição",
             description: "Marca XPTO",
-            salesPrice: 100
+            salesPrice: 100,
+            createdAt: new Date(),
+            updatedAt: new Date(),
         });
 
         const productRepository = new ProductRepository();

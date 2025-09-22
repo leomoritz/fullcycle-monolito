@@ -51,13 +51,17 @@ describe("OrderRepository test", () => {
                 id: "c2ef74ae-ae1f-4a3e-ba3f-fad687fecf4c",
                 name: "Product 1",
                 description: "Description 1",
-                salesPrice: 100
+                salesPrice: 100,
+                createdAt: new Date(),
+                updatedAt: new Date()
             },
             {
                 id: "eac4387d-94e5-46c9-ac48-0ce383f0aa79",
                 name: "Product 2",
                 description: "Description 2",
-                salesPrice: 200
+                salesPrice: 200,
+                createdAt: new Date(),
+                updatedAt: new Date()
             }
         ]);
 
@@ -127,13 +131,17 @@ describe("OrderRepository test", () => {
                 id: "c2ef74ae-ae1f-4a3e-ba3f-fad687fecf4c",
                 name: "Product 1",
                 description: "Description 1",
-                salesPrice: 100
+                salesPrice: 100,
+                createdAt: new Date(),
+                updatedAt: new Date()
             },
             {
                 id: "eac4387d-94e5-46c9-ac48-0ce383f0aa79",
                 name: "Product 2",
                 description: "Description 2",
-                salesPrice: 200
+                salesPrice: 200,
+                createdAt: new Date(),
+                updatedAt: new Date()
             }
         ]);
 
