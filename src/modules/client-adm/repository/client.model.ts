@@ -1,6 +1,7 @@
 import { Column, Model, PrimaryKey, Table } from "sequelize-typescript";
 
 @Table({ 
+    modelName: "client-table",
     tableName: "clients", 
     timestamps: false 
 })
@@ -36,9 +37,9 @@ export class ClientModel extends Model {
     @Column({ allowNull: false, field: "zip_code" })
     zipCode: string;
 
-    @Column({ allowNull: false })
+    @Column({ allowNull: false, field: "created_at" })
     createdAt: Date;
 
-    @Column({ allowNull: false })
+    @Column({ allowNull: false, field: "updated_at" })
     updatedAt: Date;
 }

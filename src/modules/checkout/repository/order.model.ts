@@ -13,12 +13,12 @@ export default class OrderModel extends Model {
     id: string;
 
     @ForeignKey(() => ClientModel)
-    @Column({ allowNull: false })
+    @Column({ allowNull: false, field: "client_id" })
     clientId: string;
 
     @BelongsTo(() => ClientModel)
     client: ClientModel;
 
-    @HasMany(() => OrderItemModel)
+    @HasMany(() => OrderItemModel, 'orderId')
     items: OrderItemModel[];
 }

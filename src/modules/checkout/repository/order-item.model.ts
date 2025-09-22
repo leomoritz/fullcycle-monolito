@@ -12,14 +12,14 @@ export class OrderItemModel extends Model {
     id: string;
 
     @ForeignKey(() => OrderModel)
-    @Column({ allowNull: false })
+    @Column({ allowNull: false, field: "order_id" })
     orderId: string;
 
     @BelongsTo(() => OrderModel)
     order: OrderModel;
 
     @ForeignKey(() => ProductModel)
-    @Column({ allowNull: false })
+    @Column({ allowNull: false, field: "product_id" })
     productId: string;
 
     @BelongsTo(() => ProductModel)
