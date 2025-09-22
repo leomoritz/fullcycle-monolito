@@ -6,7 +6,13 @@ const client = new Client({
     id: new Id("90de4457-67d6-4b43-9a40-a6d2dfa99b85"),
     name: "Client 1",
     email: "client1@example.com",
-    address: "Address 1",
+    document: "12345678900",
+    street: "Address 1",
+    number: "123",
+    complement: "Complement 1",
+    city: "City 1",
+    state: "State 1",
+    zipCode: "12345000",
 })
 
 const MockRepository = () => {
@@ -31,7 +37,13 @@ describe("FindClientUseCase unit test", () => {
         id: "90de4457-67d6-4b43-9a40-a6d2dfa99b85",
         name: "Client 1",
         email: "client1@example.com",
-        address: "Address 1",
+        document: "12345678900",
+        street: "Address 1",
+        number: "123",
+        complement: "Complement 1",
+        city: "City 1",
+        state: "State 1",
+        zipCode: "12345000",
         createdAt: client.createdAt,
         updatedAt: client.updatedAt,
     });

@@ -9,15 +9,21 @@ export default class ClientRepository implements ClientGateway {
             id: input.id.id,
             name: input.name,
             email: input.email,
-            address: input.address,
+            document: input.document,
+            street: input.street,
+            number: input.number,
+            complement: input.complement,
+            city: input.city,
+            state: input.state,
+            zipCode: input.zipCode,
             createdAt: input.createdAt,
             updatedAt: input.updatedAt
         });
     }
-    
+
     async find(id: string): Promise<Client> {
         const client = await ClientModel.findByPk(id);
-        
+
         if (!client) {
             throw new Error("Client not found");
         }
@@ -26,7 +32,13 @@ export default class ClientRepository implements ClientGateway {
             id: new Id(client.id),
             name: client.name,
             email: client.email,
-            address: client.address
+            document: client.document,
+            street: client.street,
+            number: client.number,
+            complement: client.complement,
+            city: client.city,
+            state: client.state,
+            zipCode: client.zipCode,
         });
     }
 

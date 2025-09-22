@@ -18,7 +18,13 @@ describe("AddClientUseCase unit test", () => {
             id: "c771ccc3-13d4-4d04-a5fe-70bd13edffb7",
             name: "Client 1",
             email: "client1@example.com",
-            address: "Address 1",
+            document: "12345678900",
+            street: "Address 1",
+            number: "123",
+            complement: "Complement 1",
+            city: "City 1",
+            state: "State 1",
+            zipCode: "12345000",
         };
 
         // Act
@@ -30,7 +36,13 @@ describe("AddClientUseCase unit test", () => {
             id: expect.any(String),
             name: input.name,
             email: input.email,
-            address: input.address,
+            document: input.document,
+            street: input.street,
+            number: input.number,
+            complement: input.complement,
+            city: input.city,
+            state: input.state,
+            zipCode: input.zipCode,
             createdAt: expect.any(Date),
             updatedAt: expect.any(Date),
         });
