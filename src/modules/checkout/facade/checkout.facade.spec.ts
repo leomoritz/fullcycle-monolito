@@ -7,24 +7,44 @@ import { ClientModel } from "../../client-adm/repository/client.model";
 import CheckoutFacadeFactory from "../factory/facade.factory";
 import InvoiceModel from "../../invoice/repository/invoice.model";
 import { InvoiceItemModel } from "../../invoice/repository/invoice-item.model";
+import { migrator } from "../../../migrations/config/migrator";
+import { Umzug } from "umzug";
+import TransactionModel from "../../payment/repository/transaction.model";
 
 describe("CheckoutFacade test", () => {
-    let sequlize: Sequelize;
+    let sequelize: Sequelize;
+    let migration: Umzug<any>;
 
     beforeEach(async () => {
-        sequlize = new Sequelize({
+        sequelize = new Sequelize({
             dialect: "sqlite",
             storage: ":memory:",
             logging: false,
-            sync: { force: true },
+            sync: { force: true }
         });
 
-        await sequlize.addModels([OrderModel, OrderItemModel, ClientModel, ProductModel, ProductAdmModel, InvoiceModel, InvoiceItemModel]);
-        await sequlize.sync();
+        await sequelize.addModels(
+            [
+                OrderModel, 
+                OrderItemModel, 
+                ClientModel, 
+                ProductModel, 
+                ProductAdmModel, 
+                InvoiceModel, 
+                InvoiceItemModel,
+                TransactionModel
+            ]);
+        migration = migrator(sequelize);
+        await migration.up();
     });
 
     afterEach(async () => {
-        await sequlize.close();
+        if (!migration || !sequelize) {
+            return;
+        }
+        migration = migrator(sequelize);
+        await migration.down();
+        await sequelize.close();
     });
 
     it("should place a order", async () => {
@@ -41,24 +61,38 @@ describe("CheckoutFacade test", () => {
             state: "State 1",
             zipCode: "12345678",
             createdAt: new Date(),
-            updatedAt: new Date(),
+            updatedAt: new Date()
         });
 
-
-        const products = await ProductModel.bulkCreate([
+        const products = await ProductAdmModel.bulkCreate([
             {
                 id: "c2ef74ae-ae1f-4a3e-ba3f-fad687fecf4c",
                 name: "Product 1",
                 description: "Description 1",
-                salesPrice: 100
+                stock: 10,
+                purchasePrice: 50,
+                createdAt: new Date(),
+                updatedAt: new Date()
             },
             {
                 id: "eac4387d-94e5-46c9-ac48-0ce383f0aa79",
                 name: "Product 2",
                 description: "Description 2",
-                salesPrice: 200
+                stock: 10,
+                purchasePrice: 100,
+                createdAt: new Date(),
+                updatedAt: new Date()
             }
         ]);
+
+        await ProductModel.update(
+            { salesPrice: 100, createdAt: new Date(), updatedAt: new Date() },
+            { where: { id: "c2ef74ae-ae1f-4a3e-ba3f-fad687fecf4c" } }
+        );
+        await ProductModel.update(
+            { salesPrice: 200, createdAt: new Date(), updatedAt: new Date() },
+            { where: { id: "eac4387d-94e5-46c9-ac48-0ce383f0aa79" } }
+        );
 
         const input = {
             clientId: client.id,
@@ -87,7 +121,8 @@ describe("CheckoutFacade test", () => {
         expect(output.total).toBe(300);
 
         const invoiceGenerated = await InvoiceModel.findOne({
-            where: { document: client.document }
+            where: { id: output.invoiceId },
+            include: [{ model: InvoiceItemModel }]
         });
         expect(invoiceGenerated).toBeDefined();
         expect(invoiceGenerated.items).toHaveLength(2);

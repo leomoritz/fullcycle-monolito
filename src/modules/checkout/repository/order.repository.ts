@@ -10,19 +10,21 @@ import OrderModel from "./order.model";
 
 export class OrderRepository implements CheckoutGateway {
     async addOrder(order: Order): Promise<void> {
-        await OrderModel.create({
+        const orderModel = await OrderModel.create({
             id: order.id.id,
             clientId: order.client.id.id,
-            items: order.products.map(item => ({
-                id: item.id.id,
-                productId: item.id.id,
-                quantity: item.quantity,
-            })),
-        }, {
-            include: [OrderItemModel]
         });
+
+        const orderItems = order.products.map(item => ({
+            id: new Id().id,
+            orderId: orderModel.id,
+            productId: item.id.id,
+            quantity: item.quantity,
+        }));
+
+        await OrderItemModel.bulkCreate(orderItems);
     }
-    
+
     async findOrder(id: string): Promise<Order | null> {
         const order = await OrderModel.findOne({
             where: { id },

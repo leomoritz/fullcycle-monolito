@@ -83,7 +83,7 @@ export default class PlaceOrderUseCase implements UseCaseInterface<InputPlaceOrd
             invoice = await this.generateInvoice(orderClient, products);
         }
 
-        this._checkoutRepository.addOrder(order);
+        await this._checkoutRepository.addOrder(order);
 
         return {
             id: order.id.id,

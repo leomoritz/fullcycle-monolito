@@ -19,10 +19,10 @@ export class InvoiceFacade implements InvoiceFacadeInterface {
 
 
     async generate(input: InputGenerateInvoiceFacadeDto): Promise<OutputGenerateInvoiceFacadeDto> {
-        return this._generateUseCase.execute(input);
+        return await this._generateUseCase.execute(input);
     }
 
     async find(input: InputFindInvoiceFacadeDTO): Promise<OutputFindInvoiceFacadeDTO> {
-        return this._findUseCase.execute(input);
+        return await this._findUseCase.execute(input);
     }
 }
