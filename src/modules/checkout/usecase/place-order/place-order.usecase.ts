@@ -49,6 +49,10 @@ export default class PlaceOrderUseCase implements UseCaseInterface<InputPlaceOrd
             input.products.map((product) => this.getProduct(product.productId))
         );
 
+        const uniqueProducts = this.consolidateProducts(products);
+        products.length = 0;
+        uniqueProducts.forEach((p) => products.push(p));
+
         const orderClient = new Client({
             id: new Id(client.id),
             name: client.name,
@@ -142,6 +146,22 @@ export default class PlaceOrderUseCase implements UseCaseInterface<InputPlaceOrd
                 }
             }),
         });
+    }
+
+    /**
+     * Consolida produtos duplicados somando as quantidades e retorna uma lista única
+     */
+    private consolidateProducts(products: Product[]): Product[] {
+        const productMap = new Map<string, Product>();
+        products.forEach((product) => {
+            const key = product.id.id;
+            if (productMap.has(key)) {
+                productMap.get(key)!.increaseQuantity(1);
+            } else {
+                productMap.set(key, product);
+            }
+        });
+        return Array.from(productMap.values());
     }
 
 }
