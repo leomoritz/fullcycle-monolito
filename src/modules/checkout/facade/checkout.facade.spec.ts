@@ -7,7 +7,7 @@ import { ClientModel } from "../../client-adm/repository/client.model";
 import CheckoutFacadeFactory from "../factory/facade.factory";
 import InvoiceModel from "../../invoice/repository/invoice.model";
 import { InvoiceItemModel } from "../../invoice/repository/invoice-item.model";
-import { migrator } from "../../../migrations/config/migrator";
+import { migrator } from "../../../infra/migrations/config/migrator";
 import { Umzug } from "umzug";
 import TransactionModel from "../../payment/repository/transaction.model";
 

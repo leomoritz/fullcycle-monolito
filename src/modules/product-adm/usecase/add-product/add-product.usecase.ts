@@ -17,6 +17,7 @@ export default class AddProductUseCase implements UseCaseInterface<InputAddProdu
             name: input.name,
             description: input.description,
             purchasePrice: input.purchasePrice,
+            salesPrice: input.salesPrice,
             stock: input.stock
         };
         const product = new Product(props);
@@ -28,6 +29,7 @@ export default class AddProductUseCase implements UseCaseInterface<InputAddProdu
             name: product.name,
             description: product.description,
             purchasePrice: product.purchasePrice,
+            salesPrice: product.salesPrice,
             stock: product.stock,
             createdAt: product.createdAt,
             updatedAt: product.updatedAt,    
